@@ -54,7 +54,7 @@ function renderMovies(movies = []) {
     listItem.className = "movie-card";
     let imageUrl = `https://image.tmdb.org/t/p/original${poster_path}`;
     let mInfo = {
-      title : title.replaceAll(`'`, ``),
+      title: title.replaceAll(`'`, ``),
       vote_average,
       poster_path,
       vote_count,
@@ -72,34 +72,39 @@ function renderMovies(movies = []) {
         <div class="movie-title">${title}</div>
         <div class="movie-heart" style="display: flex">
             <div class="movie-votes"><p>Votes: ${vote_count}</p><p>Rating: ${vote_average}</p><p>${release_date}</p></div>
-            <i mInfo='${JSON.stringify(mInfo)}' class="fa-regular fa-heart fa-2xl fav-icon ${isFav ? "fa-solid" : ""}"></i>
+            <i mInfo='${JSON.stringify(mInfo)}' class="fa fa-heart${
+      isFav ? "" : "-o"
+    } vote"></i>
 
         </div>
     </div>`;
 
-    const favIconBTN = listItem.querySelector(".fav-icon");
-        favIconBTN.addEventListener("click", (event)=>{
-            // console.log(event.target);
-            // console.log("MINFO", event.target.getAttribute("mInfo"))
+    const favIconBTN = listItem.querySelector(".vote");
+    favIconBTN.addEventListener("click", (event) => {
+      // console.log(event.target);
+      // console.log("MINFO", event.target.getAttribute("mInfo"))
 
-            let mInfo = JSON.parse(event.target.getAttribute("mInfo"));
-            // console.log("MINFOOO",mInfo);
+      let mInfo = JSON.parse(event.target.getAttribute("mInfo"));
+      // console.log("MINFOOO",mInfo);
 
-            if(favIconBTN.classList.contains("fa-solid")){
-                // unmark it
-                // remove the class to unmark the movie visually
-                favIconBTN.classList.remove("fa-solid")
-                // remove this movie info from the local storage
-                removeFavMoviesFromLocalStorage(mInfo);
-            } else {
-                // mark it
-                // add the class to unmark the movie visually
+      if (favIconBTN.classList.contains("fa-heart")) {
+        // unmark it
+        // remove the class to unmark the movie visually
+        favIconBTN.classList.remove("fa-heart");
 
-                favIconBTN.classList.add("fa-solid")
-                // add the movie info into local storage
-                addMovieInfoInLocalStorage(mInfo);
-            }
-        })
+        // remove this movie info from the local storage
+        favIconBTN.classList.add("fa-heart-o");
+        removeFavMoviesFromLocalStorage(mInfo);
+      } else {
+        // mark it
+        // add the class to unmark the movie visually
+
+        favIconBTN.classList.remove("fa-heart-o");
+        favIconBTN.classList.add("fa-heart");
+        // add the movie info into local storage
+        addMovieInfoInLocalStorage(mInfo);
+      }
+    });
 
     movieList.appendChild(listItem);
   });
