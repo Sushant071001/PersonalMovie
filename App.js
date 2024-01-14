@@ -1,5 +1,7 @@
 const movieList = document.getElementById("movies");
 
+console.log("Comments added");
+
 const APIKEY = "f531333d637d0c44abc85b3e74db2186";
 let currentPage = 1;
 let totalPages = 1;
