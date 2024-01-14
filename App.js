@@ -7,6 +7,7 @@ let currentPage = 1;
 let totalPages = 1;
 let movies = [];
 
+
 function getFavMoviesFromLocalStorage() {
   const favMovies = JSON.parse(localStorage.getItem("favouriteMovie"));
   return favMovies === null ? [] : favMovies;
@@ -38,8 +39,17 @@ function renderMovies(movies = []) {
   }, {});
   if (currentPage == 1) {
     prevBtn.disabled = true;
+    firstBtn.disabled = true;
   } else {
     prevBtn.disabled = false;
+    firstBtn.disabled = false;
+  }
+  if (currentPage == totalPages) {
+    nextBtn.disabled = true;
+    lastBtn.disabled = true;
+  } else {
+    nextBtn.disabled = false;
+    lastBtn.disabled = false;
   }
 
   console.log(favMovMapping);
@@ -110,6 +120,10 @@ function renderMovies(movies = []) {
   });
 }
 
+
+let firstBtn = document.getElementById("first-button");
+let lastBtn = document.getElementById("last-button");
+
 async function fetchMovies() {
   try {
     const response = await fetch(
@@ -144,13 +158,17 @@ function navigateNext(params) {
   }
   if (currentPage == 1) {
     prevBtn.disabled = true;
+    // firstBtn.disabled = true;
   } else {
     prevBtn.disabled = false;
+    // firstBtn.disabled = false;
   }
-  if (currentPage >= totalPages) {
+  if (currentPage == totalPages) {
     nextBtn.disabled = true;
+    // lastBtn.disabled = true;
   } else {
     nextBtn.disabled = false;
+    // lastBtn.disabled = false;
   }
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -185,13 +203,22 @@ const totPage = document.getElementById("totalPage");
 prevBtn.addEventListener("click", navigatePrev);
 nextBtn.addEventListener("click", navigateNext);
 
-totPage.addEventListener("click", () => {
+totPage.addEventListener("click", navLast);
+
+function navLast(){
   currentPage = 454;
   currPage.innerHTML = "&nbsp;&nbsp;&nbsp;" + currentPage;
   document.getElementById("currPage1").innerHTML = `Page&nbsp;${currentPage}`;
   fetchMovies();
   window.scrollTo({ top: 0, behavior: "smooth" });
-});
+};
+function navFirst(){
+  currentPage = 1;
+  currPage.innerHTML = "&nbsp;&nbsp;&nbsp;" + currentPage;
+  document.getElementById("currPage1").innerHTML = `Page&nbsp;${currentPage}`;
+  fetchMovies();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
 // step 5
 async function searchMovies() {
@@ -362,6 +389,11 @@ function switchTabs(event) {
 
   displayMovies();
 }
+
+
+
+firstBtn.addEventListener("click", navFirst);
+lastBtn.addEventListener("click", navLast);
 
 const allTabsBtn = document.getElementById("all-tab");
 const favTabsBtn = document.getElementById("favorites-tab");

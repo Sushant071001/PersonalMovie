@@ -220,3 +220,11 @@ header a {
   background-color: #333;
   color: white;
 }
+
+#last-button{
+  margin-left: 4px;
+}
+#first-button{
+  margin-right: 4px;
+}
+
