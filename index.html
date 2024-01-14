@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    /> -->
+
+    <link rel="stylesheet" href="styles.css" />
+    <title>Movie Deck</title>
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="#">Movie Deck</a></h1>
+      <div class="page">
+        <span id="currPage1">Page&nbsp;1</span> of
+        <span id="totalPage1">&nbsp;&nbsp;&nbsp;</span>
+      </div>
+    </header>
+
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-bar"
+        id="search-input"
+        placeholder="Search by name.."
+      />
+      <button class="search-button" id="search-button">Search</button>
+    </div>
+
+    <div class="sort-buttons">
+      <button class="sort-button" id="sort-by-date">
+        Sort by Date ( Oldest to latest )
+      </button>
+      <button class="sort-button" id="sort-by-rating">
+        Sort by Rating ( Least to most )
+      </button>
+    </div>
+
+    <div class="tabs">
+      <button id="all-tab" class="active-tab">All</button>
+      <button id="favorites-tab">Favorites</button>
+    </div>
+
+    <div class="movies" id="movies"></div>
+
+    <div class="pagination" id="paginationContainer">
+      <button id="prev-button" class="page-btn">Previous</button>
+      <span id="current-button">
+        <span id="currPage">&nbsp;&nbsp;&nbsp;1</span> of
+        <span id="totalPage">1&nbsp;&nbsp;&nbsp;</span>
+      </span>
+      <button id="next-button" class="page-btn">Next</button>
+    </div>
+
+    <script src="App.js"></script>
+    <script src="https://kit.fontawesome.com/b4134665c5.js" crossorigin="anonymous"></script>
+
+  </body>
+</html>
